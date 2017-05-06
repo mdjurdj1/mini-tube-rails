@@ -53,11 +53,16 @@ RSpec.describe User, type: :model do
 
   describe 'relationships' do
 
-    it 'has many playlists' do
+    it 'has many playlists that are deleted upon deletion of user' do
       user = create(:user)
-      user.playlists.create(name: 'Rap Musicz', description: 'Muh Rap Songs')
+      playlist = user.playlists.create(name: 'Rap Musicz', description: 'Muh Rap Songs')
 
       expect(user.playlists.first).not_to eq(nil)
+
+      user.destroy
+      playlist = Playlist.find_by(id: playlist.id)
+      
+      expect(playlist).to eq(nil)
     end
 
   end

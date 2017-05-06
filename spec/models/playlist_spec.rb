@@ -14,9 +14,23 @@ RSpec.describe Playlist, type: :model do
   end
 
   describe 'relationships' do
-    pending 'has many videos that are destroyed upon deletion of playlist'
+    # it 'has many videos that are destroyed upon deletion of playlist' do
+    #   user = create(:user)
+    #   playlist = user.playlists.create(name: 'Rap Musicz', description: 'Muh Rap Songs')
+    #
+    #   expect(user.playlists.first).not_to eq(nil)
+    #
+    #   user.destroy
+    #   playlist = Playlist.find_by(id: playlist.id)
+    #
+    #   expect(playlist).to eq(nil)
+    end
 
-    pending 'belongs to a user'
+    it 'belongs to a user' do
+      playlist = create(:playlist)
+
+      expect(playlist.user.email).to eq("mdjurdj1@gmail.com")
+    end
   end
 
 end
