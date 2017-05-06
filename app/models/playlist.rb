@@ -10,7 +10,7 @@ class Playlist < ApplicationRecord
     end
   end
 
-  def count
-    self.videos.count 
+  def video_count
+    self.videos.count
   end
 end

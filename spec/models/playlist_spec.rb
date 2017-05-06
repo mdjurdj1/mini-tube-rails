@@ -69,18 +69,19 @@ RSpec.describe Playlist, type: :model do
 
     end
 
-    describe 'count' do
+    describe 'video_count' do
 
-      it "calculates the total count of a playlist's videos" do
+      it "correctly calculates the total count of a playlist's videos" do
         video = create(:video)
         video2 = Video.create(videoId: '325252hdh')
+        video3 = create(:video)
         @playlist.add_video(video)
         @playlist.add_video(video2)
+        @playlist.add_video(video3)
 
-        expect(@playlist.videos.count).to eq(2)
-        expect(@playlist.playlist_videos.count).to eq(2)
+        expect(@playlist.video_count).to eq(2)
     end
-
   end
 end
+
 end
