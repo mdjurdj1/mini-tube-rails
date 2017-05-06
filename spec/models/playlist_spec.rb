@@ -58,10 +58,9 @@ RSpec.describe Playlist, type: :model do
         expect(@playlist.playlist_videos.count).to eq(1)
       end
 
-      it 'does not allow duplicate videos to be saved' do
+      it 'does not allow duplicate videos to be saved to a single playlist' do
         video = create(:video)
         video2 = create(:video)
-        binding.pry
         @playlist.add_video(video)
         @playlist.add_video(video2)
 
@@ -71,7 +70,17 @@ RSpec.describe Playlist, type: :model do
     end
 
     describe 'count' do
-      it "calculates the total count of a playlist's videos"
+
+      it "calculates the total count of a playlist's videos" do
+        video = create(:video)
+        video2 = Video.create(videoId: '325252hdh')
+        @playlist.add_video(video)
+        @playlist.add_video(video2)
+
+        expect(@playlist.videos.count).to eq(2)
+        expect(@playlist.playlist_videos.count).to eq(2)
     end
+
   end
+end
 end
