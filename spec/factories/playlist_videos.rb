@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :playlist_video do
-    video nil
-    playlist nil
+    video
+    playlist 
   end
 end
