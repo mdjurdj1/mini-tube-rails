@@ -16,10 +16,15 @@ RSpec.describe PlaylistVideo, type: :model do
 
   describe 'relationships' do
     it 'belongs to a playlist' do
+      playlist_video = create(:playlist_video)
 
+      expect(playlist_video.playlist.name).to eq("Rap Playlist")
     end
 
     it 'belongs to a video' do
+      playlist_video = create(:playlist_video)
+
+      expect(playlist_video.video.videoId).to eq("346346346raar232")
     end
   end
 

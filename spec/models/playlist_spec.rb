@@ -20,7 +20,7 @@ RSpec.describe Playlist, type: :model do
       video = create(:video)
       playlist_video = playlist.playlist_videos.create(video: video)
 
-      expect(playlist.playlist_videos.first).not_to eq(nil)
+      expect(playlist.playlist_videos.first.id).not_to eq(nil)
 
       playlist.destroy
       playlist_video = PlaylistVideo.find_by(id: playlist_video.id)
