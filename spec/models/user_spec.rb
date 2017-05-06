@@ -16,6 +16,9 @@ RSpec.describe User, type: :model do
 
     it 'requires that an email is unique'
 
+    it 'requires that an email is valid (contains an @ symbol and
+    a .com, .org, etc...)'
+
   end
 
   describe 'on save' do
