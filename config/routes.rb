@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       #api/v1/auth
       post '/auth', to: "auth#login"
       post '/auth/refresh', to: "auth#refresh"
+
+      resources :playlists, only: [:show, :update]
     end
   end
 end
