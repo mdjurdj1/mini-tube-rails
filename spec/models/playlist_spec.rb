@@ -43,4 +43,35 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe 'instance methods' do
+
+    before(:each) do
+      @playlist = create(:playlist)
+    end
+
+    describe 'add_video' do
+
+      it 'adds a video to the playlist' do
+        video = create(:video)
+        @playlist.add_video(video)
+
+        expect(@playlist.playlist_videos.count).to eq(1)
+      end
+
+      it 'does not allow duplicate videos to be saved' do
+        video = create(:video)
+        video2 = create(:video)
+        binding.pry
+        @playlist.add_video(video)
+        @playlist.add_video(video2)
+
+        expect(@playlist.playlist_videos.count).to eq(1)
+      end
+
+    end
+
+    describe 'count' do
+      it "calculates the total count of a playlist's videos"
+    end
+  end
 end
