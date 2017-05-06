@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :video do
-    videoId "MyString"
+    videoId "346346346raar232"
   end
 end
