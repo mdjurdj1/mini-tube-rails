@@ -44,12 +44,21 @@ RSpec.describe User, type: :model do
   describe 'on save' do
 
     it 'hashes a password' do
+      user = build(:user)
+      user.save
+
+      expect(user.password_digest).not_to equal(user.password)
     end
   end
 
   describe 'relationships' do
 
-    it 'has many playlists'
+    it 'has many playlists' do
+      user = create(:user)
+      user.playlists.create(name: 'Rap Musicz', description: 'Muh Rap Songs')
+
+      expect(user.playlists.first).not_to eq(nil)
+    end
 
   end
 
