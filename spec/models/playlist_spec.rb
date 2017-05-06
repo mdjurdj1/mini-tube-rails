@@ -14,16 +14,26 @@ RSpec.describe Playlist, type: :model do
   end
 
   describe 'relationships' do
-    # it 'has many videos that are destroyed upon deletion of playlist' do
-    #   user = create(:user)
-    #   playlist = user.playlists.create(name: 'Rap Musicz', description: 'Muh Rap Songs')
-    #
-    #   expect(user.playlists.first).not_to eq(nil)
-    #
-    #   user.destroy
-    #   playlist = Playlist.find_by(id: playlist.id)
-    #
-    #   expect(playlist).to eq(nil)
+
+    it 'has many playlist_videos that are destroyed upon deletion of playlist' do
+      playlist = create(:playlist)
+      video = create(:video)
+      playlist_video = playlist.playlist_videos.create(video: video)
+
+      expect(playlist.playlist_videos.first).not_to eq(nil)
+
+      playlist.destroy
+      playlist_video = PlaylistVideo.find_by(id: playlist_video.id)
+
+      expect(playlist_video).to eq(nil)
+    end
+
+    it 'has many videos through playlist videos' do
+      playlist = create(:playlist)
+      video = create(:video)
+      playlist_video = playlist.playlist_videos.create(video: video)
+
+      expect(playlist.videos.count).to eq(1)
     end
 
     it 'belongs to a user' do
