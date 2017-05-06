@@ -18,11 +18,11 @@ RSpec.describe "Api::V1::Users", type: :request do
           headers: { 'Content-Type': 'application/json' }
 
         body = JSON.parse(response.body)
-
+        binding.pry
         expect(response.status).to eq(200)
         expect(body['token']).not_to eq(nil)
         expect(body['user']['id']).not_to eq(nil)
-        expect(body['user']['email']).not_to eq('mdjurdj1@gmail.com')
+        expect(body['user']['email']).to eq('mdjurdj1@gmail.com')
         expect(body['user']['password_digest']).to eq(nil)
       end
 
