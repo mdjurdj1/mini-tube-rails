@@ -3,7 +3,13 @@ class Api::V1::PlaylistsController < ApplicationController
 
   def index
     @playlists = current_user.playlists.all
-    render 'playlists/playlists.json.jbuilder', playlists: @playlists
+    if @playlists
+      render 'playlists/playlists.json.jbuilder', playlists: @playlists
+    else
+      render json: {
+        errors: 'No playlists exist.'
+      }, status: 500
+    end
   end
 
   def create
