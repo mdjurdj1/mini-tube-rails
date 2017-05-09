@@ -24,6 +24,14 @@ class Api::V1::PlaylistsController < ApplicationController
   end
 
   def show
+    @playlist = current_user.playlist.find_by(id: params[:id])
+    if @playlist && @playlist.user == current_user
+      render 'playlists/playlist.json.jbuilder', playlists: @playlist
+    else
+      render json: {
+        errors: "Unable to retrieve this playlist."
+      }, status: 500
+    end
   end
 
   def update
