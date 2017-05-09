@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
       #/api/v1/users
       resources :users, only: [:create]
+      #/api/v1/playlists
       resources :playlists
       #api/v1/auth
       post '/auth', to: "auth#login"

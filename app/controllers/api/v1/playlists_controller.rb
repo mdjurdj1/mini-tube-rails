@@ -1,5 +1,5 @@
 class Api::V1::PlaylistsController < ApplicationController
-  before_action :authenticate_token!, only: [:index, :show, :create, :update]
+  before_action :authenticate_token!
 
   def index
     @playlists = current_user.playlists
