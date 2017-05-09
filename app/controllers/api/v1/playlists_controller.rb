@@ -1,8 +1,8 @@
 class Api::V1::PlaylistsController < ApplicationController
-  before_action :authenticate_token!, only: [:show, :create, :update]
+  before_action :authenticate_token!, only: [:index, :show, :create, :update]
 
   def index
-    @playlists = current_user.playlists.all
+    @playlists = current_user.playlists
     if @playlists
       render 'playlists/playlists.json.jbuilder', playlists: @playlists
     else
