@@ -29,6 +29,20 @@ class Api::V1::PlaylistsController < ApplicationController
   def update
   end
 
+  def destroy
+    @playlist = current_user.playlists.find_by(id: params[:id])
+    if @playlist && @playlist.user == current_user
+      @playlist.destroy
+      render json: {
+        message: ['Playlist was successfully deleted.']
+      }
+    else
+      render json: {
+        errors: ['Unable to delete playlist.']
+      }, status: 500
+    end
+  end
+
   private
 
   def playlist_params
