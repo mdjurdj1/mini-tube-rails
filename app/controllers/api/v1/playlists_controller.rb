@@ -2,7 +2,7 @@ class Api::V1::PlaylistsController < ApplicationController
   before_action :authenticate_token!, only: [:show, :create, :update]
 
   def index
-    @playlists = current_user.playlists
+    @playlists = current_user.playlists.all
     render 'playlists/playlists.json.jbuilder', playlists: @playlists
   end
 
