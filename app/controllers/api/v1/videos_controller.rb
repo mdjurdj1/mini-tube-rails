@@ -1,8 +1,8 @@
 class Api::V1::VideosController < ApplicationController
-  before_action :authenticate_token!
+  before_action :authenticate_token!, :find_playlist
 
   def index
-    @playlists = current_user.playlists
+    @videos = @playlist.videos
     if @playlists
       render 'playlists/playlists.json.jbuilder', playlists: @playlists
     else
@@ -17,7 +17,7 @@ class Api::V1::VideosController < ApplicationController
     @playlist = current_user.playlists.find_by(id: params[:playlist_id])
     if @video && @playlist
       @playlist_video = PlaylistVideo.new(video_id: @video.id, playlist_id: @playlist_id)
-     render 'videos/videos.json.jbuilder', video: @video
+     render 'videos/video.json.jbuilder', video: @video
     else
       render json: {
         errors: @video.errors
@@ -57,6 +57,10 @@ class Api::V1::VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:name, :videoId)
+  end
+
+  def find_playlist
+    @playlist = current_user.playlists.find_by(id: params[:playlist_id])
   end
 
 end
