@@ -18,7 +18,9 @@ class Api::V1::VideosController < ApplicationController
     if @video.save && @playlist
       @playlist_video = PlaylistVideo.new(name: @video.name, videoId: @video.videoId, video_id: @video.id, playlist_id: @playlist.id)
       @playlist_video.save
-     render 'videos/video.json.jbuilder', video: @playlist_video
+     render json: {
+       success: ['Video was saved.']
+     }, status: 200
     else
       render json: {
         errors: @video.errors
