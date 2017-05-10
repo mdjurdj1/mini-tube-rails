@@ -42,17 +42,17 @@ class Api::V1::VideosController < ApplicationController
   end
 
   def destroy
-    # @playlist = current_user.playlists.find_by(id: params[:id])
-    # if @playlist && @playlist.user == current_user
-    #   @playlist.destroy
-    #   render json: {
-    #     message: ['Playlist was successfully deleted.']
-    #   }
-    # else
-    #   render json: {
-    #     errors: ['Unable to delete playlist.']
-    #   }, status: 500
-    # end
+    @video = PlaylistVideo.find_by(playlist_id: params[:playlist_id])
+    if @video
+      @video.destroy
+      render json: {
+        message: ['Video was successfully deleted from playlist.']
+      }
+    else
+      render json: {
+        errors: ['Unable to delete video.']
+      }, status: 500
+    end
   end
 
   private
