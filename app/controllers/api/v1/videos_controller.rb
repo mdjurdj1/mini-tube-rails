@@ -4,7 +4,7 @@ class Api::V1::VideosController < ApplicationController
   def index
     @videos = @playlist.videos
     if @videos
-      render 'playlists/videos.json.jbuilder', videos: @videos
+      render 'videos/videos.json.jbuilder', videos: @videos
     else
       render json: {
         errors: 'No videos found.'
