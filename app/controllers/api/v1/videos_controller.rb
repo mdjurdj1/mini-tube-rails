@@ -13,12 +13,14 @@ class Api::V1::VideosController < ApplicationController
   end
 
   def create
-    @video = PlaylistVideo.new(playlist_id: params[:playlist_id], current_user.playlists.new(playlist_params)
-    if @playlist.save
-      render 'playlists/playlist.json.jbuilder', playlists: @playlist
+    @video = Video.new(video_params)
+    @playlist = current_user.playlists.find_by(id: params[:playlist_id])
+    if @video && @playlist
+      @playlist_video = PlaylistVideo.new(video_id: @video.id, playlist_id: @playlist_id)
+     render 'videos/videos.json.jbuilder', video: @video
     else
       render json: {
-        errors: @playlist.errors
+        errors: @video.errors
       }, status: 500
     end
   end
@@ -54,7 +56,7 @@ class Api::V1::VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:name, :description)
+    params.require(:video).permit(:name, :videoId)
   end
 
 end
