@@ -13,7 +13,7 @@ class Api::V1::VideosController < ApplicationController
   end
 
   def create
-    @playlist = current_user.playlists.new(playlist_params)
+    @video = PlaylistVideo.new(playlist_id: params[:playlist_id], current_user.playlists.new(playlist_params)
     if @playlist.save
       render 'playlists/playlist.json.jbuilder', playlists: @playlist
     else
@@ -53,8 +53,8 @@ class Api::V1::VideosController < ApplicationController
 
   private
 
-  def playlist_params
-    params.require(:playlist).permit(:name, :description)
+  def video_params
+    params.require(:video).permit(:name, :description)
   end
 
 end
