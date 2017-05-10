@@ -2,7 +2,7 @@ class Api::V1::VideosController < ApplicationController
   before_action :authenticate_token!, :find_playlist
 
   def index
-    @videos = @playlist.videos
+    @videos = @playlist.playlist_videos
     if @videos
       render 'videos/videos.json.jbuilder', videos: @videos
     else
