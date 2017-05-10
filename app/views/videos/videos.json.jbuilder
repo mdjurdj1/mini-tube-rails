@@ -1,1 +1,1 @@
-json.array! @videos, :id, :name, :playlist_id, :user_id, :videoId
+json.array! @playlist_videos, :id, :name, :playlist_id, :videoId
