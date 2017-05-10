@@ -16,7 +16,7 @@ class Api::V1::VideosController < ApplicationController
     @video = Video.new(video_params)
     @playlist = current_user.playlists.find_by(id: params[:playlist_id])
     if @video.save && @playlist
-      @playlist_video = PlaylistVideo.new(name: @video.name, videoId: @video.videoId, video_id: @video.id, playlist_id: @playlist.id)
+      @playlist_video = PlaylistVideo.new(name: params[:video][:name], videoId: @video.videoId, video_id: @video.id, playlist_id: @playlist.id)
       @playlist_video.save
      render json: {
        success: ['Video was saved.']
